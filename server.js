@@ -1,15 +1,15 @@
 const express = require('express');
 const path = require('path');
-const { notes } = require('./db/db.json');
+const notes = require('./db/db.json');
 const PORT = process.env.PORT || 3001
 const app = express();
 
 // app.use(express.urlencoded({ extended: true }));
 // app.use(express.json());
 
-// API Routes
+console.log(notes);
 
-console.log(db);
+// API Routes
 
 app.get('/api/notes', (req, res) => {
     // read db.json file and return all saved notes as JSON
@@ -37,14 +37,14 @@ app.post('/api/notes', (req, res) => {
 // HTML Routes
 
 // GET /notes should return the notes.html file.
-app.get('/notes', (req, res) => {
-    res.sendFile(path.join(__dirname, './public/notes.html'))
-})
+// app.get('/notes', (req, res) => {
+//     res.sendFile(path.join(__dirname, './public/notes.html'))
+// })
 
-// GET * should return the index.html file.
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, './public/index.html'));
-})
+// // GET * should return the index.html file.
+// app.get('*', (req, res) => {
+//     res.sendFile(path.join(__dirname, './public/index.html'));
+// })
 
 // app.listen call
 app.listen(PORT, () => {
