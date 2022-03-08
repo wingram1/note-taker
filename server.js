@@ -1,16 +1,27 @@
 const express = require('express');
-// const fs = require('fs'); dont know if i need
 const path = require('path');
-const { db } = require('./db.json');
-const PORT = process.env.PORT || 6969
+const { notes } = require('./db/db.json');
+const PORT = process.env.PORT || 3001
 const app = express();
 
+// app.use(express.urlencoded({ extended: true }));
+// app.use(express.json());
 
 // API Routes
 
+console.log(db);
+
 app.get('/api/notes', (req, res) => {
     // read db.json file and return all saved notes as JSON
-})
+    
+    console.log(notes);
+    // if (!notes) {
+    //     console.log("No notes found.");
+    //     return;
+    // } else {
+    res.json(notes)
+    // }
+});
 
 app.post('/api/notes', (req, res) => {
     // receive a new note to save on the request body
