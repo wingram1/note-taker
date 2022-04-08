@@ -1,6 +1,19 @@
-[
+{
+  "notes": [
     {
-        "title":"NOTE TITLE",
-        "text":"NOTE TEXT, YOU DID IT WILLIAM!"
+      "title": "NOTE TITLE",
+      "text": "NOTE TEXT, YOU DID IT WILLIAM!",
+      "id": "0"
+    },
+    {
+      "title": "new note text",
+      "text": "text description of new note",
+      "id": "8658c69f-e8e4-4d9b-bac0-c6e1eb4db2f4"
+    },
+    {
+      "title": "another new note text",
+      "text": "another text description of new note",
+      "id": "a001f4cb-3a9f-4aff-b84a-f9e3836537ad"
     }
-]
+  ]
+}

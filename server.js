@@ -1,8 +1,16 @@
 const express = require('express');
 const path = require('path');
-const notes = require('./db/db');
+const fs = require('fs');
+const { notes } = require('./db/db');
+const { v4: uuidv4 } = require('uuid');
 const PORT = process.env.PORT || 3001
 const app = express();
+
+console.log("Logging three uuid's...");
+console.log(uuidv4());
+console.log(uuidv4());
+console.log(uuidv4());
+console.log("Logging over");
 
 // middleware
 app.use(express.json());
@@ -15,7 +23,7 @@ console.log(notes);
 app.get('/api/notes', (req, res) => {
     // read db.json file and return all saved notes as JSON
     
-    console.log(notes);
+    console.log("Initial notes array: " + notes);
     if (!notes) {
         console.log("No notes found.");
         return;
@@ -25,17 +33,21 @@ app.get('/api/notes', (req, res) => {
 
 app.post('/api/notes', (req, res) => {
     // receive a new note to save on the request body
-    const newNote = body;
-    // req.body.id = notes.length.toString();
+    const newNote = req.body;
+    req.body.id = uuidv4();
+    console.log("New note: " + JSON.stringify(req.body))
 
     // add it to the db.json file, then
-    // return the new note to the client
-    notes.push(newNote) 
+    notes.push(newNote)
 
-    // You'll need to find a way to give each note a unique id when it's saved 
-    // (look into npm packages that could do this for you).
-    // uuid (already installed)
-})
+    fs.writeFileSync(
+        path.join(__dirname, './db/db.json'),
+        JSON.stringify({notes: notes }, null, 2)
+    );
+
+    // return the note note to the client
+    res.json(newNote);
+});
 
 
 // HTML Routes
