@@ -6,15 +6,12 @@ const { v4: uuidv4 } = require('uuid');
 const PORT = process.env.PORT || 3001
 const app = express();
 
-console.log("Logging three uuid's...");
-console.log(uuidv4());
-console.log(uuidv4());
-console.log(uuidv4());
-console.log("Logging over");
-
 // middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+// app.use('/api', apiRoutes);
+// app.use('/', htmlRoutes);
+app.use(express.static('public'));
 
 console.log(notes);
 
@@ -49,17 +46,31 @@ app.post('/api/notes', (req, res) => {
     res.json(newNote);
 });
 
+app.delete('/api/notes/:id', (req, res) => {
+    noteId = req.params.id
+    // get index of selected note
+    const index = notes.map(e => e.id).indexOf(noteId)
+    // splice and update json file
+    notes.splice(index, 1);
+
+    fs.writeFileSync(
+        path.join(__dirname, './db/db.json'),
+        JSON.stringify({notes: notes }, null, 2)
+    )
+
+    res.json(noteId);
+});
 
 // HTML Routes
 
 // GET /notes should return the notes.html file.
 app.get('/notes', (req, res) => {
-    res.sendFile(path.join(__dirname, './public/notes.html'))
+    res.sendFile(path.join(__dirname, '/public/notes.html'))
 })
 
 // GET * should return the index.html file.
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, './public/index.html'));
+    res.sendFile(path.join(__dirname, '/public/index.html'));
 })
 
 // app.listen call
