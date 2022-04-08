@@ -14,10 +14,10 @@ Webpage where users can write, read, and delete notes
   - HTML, CSS, and JavaScript
 
 ## Deployed Application
-[]()
+https://arcane-beyond-59494.herokuapp.com/
 
 ## Screenshot
-![Webpage](/images/screenshot.png)
+![Screenshot of application](/images/screenshot.png)
 
 ## Contributions
 Front-end starter code provided by the Vanderbilt Coding Bootcamp
